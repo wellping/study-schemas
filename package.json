@@ -1,10 +1,10 @@
 {
-  "name": "wellping-study-file",
+  "name": "@wellping/study-file",
   "version": "1.0.0",
   "description": "",
   "repository": "git://github.com/wellping/study-file.git",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "@wellping:registry": "https://npm.pkg.github.com"
   },
   "files": [
     "./lib"

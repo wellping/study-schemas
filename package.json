@@ -1,0 +1,19 @@
+{
+  "name": "wellping-study-file",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "devDependencies": {
+    "@types/lodash": "^4.14.178",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "date-fns": "^2.27.0",
+    "lodash": "^4.17.21",
+    "zod": "^3.11.6"
+  }
+}

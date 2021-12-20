@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "lib": ["dom", "esnext"],
+    "outDir": "./lib",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false
+  },
+  "include": ["./src/**/*"]
+}

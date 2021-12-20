@@ -26,3 +26,5 @@ jobs:
       run: yarn
     - name: Run tests
       run: yarn test
+    - name: Prepare (should have no error)
+      run: yarn prepare

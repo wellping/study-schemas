@@ -129,3 +129,7 @@ dist
 
 # Built files.
 lib/
+
+
+# Jest coverage
+coverage/**/*

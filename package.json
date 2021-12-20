@@ -15,7 +15,6 @@
   },
   "author": "",
   "devDependencies": {
-    "@types/lodash": "^4.14.178",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
     "eslint": "^8.5.0",
@@ -26,7 +25,6 @@
   },
   "dependencies": {
     "date-fns": "^2.27.0",
-    "lodash": "^4.17.21",
     "zod": "^3.11.6"
   }
 }

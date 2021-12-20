@@ -2,7 +2,6 @@
  * These are common schemas that are used by other schemas.
  * It is moved here to avoid circular dependency.
  */
-import uniq from "lodash/uniq";
 import * as z from "zod";
 
 import { idRegex, idRegexErrorMessage } from "./helper";
@@ -68,7 +67,8 @@ export const ChoicesListSchema = z
   .refine(
     (choices) => {
       // Check if there is any duplicate items.
-      return choices.length === uniq(choices).length;
+      // https://stackoverflow.com/a/7376645
+      return choices.length === new Set(choices).size;
     },
     {
       message: "There should not be duplicate elements in the choices list.",

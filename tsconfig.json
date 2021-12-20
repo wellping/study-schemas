@@ -3,6 +3,7 @@
     "allowSyntheticDefaultImports": true,
     "lib": ["dom", "esnext"],
     "outDir": "./lib",
+    "declaration": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "strict": true,

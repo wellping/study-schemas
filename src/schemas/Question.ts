@@ -1,6 +1,5 @@
 import * as z from "zod";
 
-import { SLIDER_DEFAULTS } from "../../questionScreens/constants";
 import {
   StreamNameSchema,
   QuestionIdSchema,
@@ -8,6 +7,13 @@ import {
   ChoiceSchema,
 } from "./common";
 import { idRegex, idRegexErrorMessage } from "./helper";
+
+export const SLIDER_DEFAULTS = {
+  DEFAULT_VALUE: 50,
+  MIN_VALUE: 0,
+  MAX_VALUE: 100,
+  STEP: 1,
+};
 
 export const QuestionTypeSchema = z.enum([
   "Slider",

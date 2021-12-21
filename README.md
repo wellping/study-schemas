@@ -4,9 +4,13 @@ Used in
 - https://github.com/wellping/wellping
 - https://github.com/wellping/study-file-editor
 
-## Test
+## Development
 
 ```bash
+# Installation
+yarn install
+
+# Test
 yarn test
 ```
 

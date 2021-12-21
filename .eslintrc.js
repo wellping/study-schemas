@@ -7,6 +7,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "prettier",
   ],
+  ignorePatterns: ["**/*.snap"],
   env: {
     node: true,
   },

@@ -1,8 +1,8 @@
 {
-  "name": "@wellping/study-file",
+  "name": "@wellping/study-schemas",
   "version": "1.0.0",
-  "description": "Study file schemas for Well Ping!",
-  "repository": "git://github.com/wellping/study-file.git",
+  "description": "Study-related schemas for Well Ping!",
+  "repository": "git://github.com/wellping/study-schemas.git",
   "files": [
     "./lib"
   ],

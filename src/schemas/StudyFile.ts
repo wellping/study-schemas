@@ -3,6 +3,12 @@ import * as z from "zod";
 
 import { StreamsSchema, StreamsStartingQuestionIdsSchema } from "./Stream";
 import { StudyIdSchema, StreamNameSchema, ChoicesListSchema } from "./common";
+import {
+  DATETIME_REGEX,
+  HOURMINUTESECOND_REGEX,
+  datetimeRegexErrorMessage,
+  hourMinuteSecondRegexErrorMessage,
+} from "./helper";
 
 export const WeekStartsOnSchema = z.union([
   z.literal(0),
@@ -73,6 +79,9 @@ function parseJSONDateStringToDateAndThrowIfError(
 const DateOrStringDateSchema = z.union([
   z
     .string()
+    .regex(DATETIME_REGEX, {
+      message: datetimeRegexErrorMessage(),
+    })
     .superRefine((val, ctx) => {
       try {
         parseJSONDateStringToDateAndThrowIfError(val);
@@ -107,6 +116,9 @@ function parseHourMinuteSecondStringToSeconds(
 const HourMinuteSecondSchema = z.union([
   z
     .string()
+    .regex(HOURMINUTESECOND_REGEX, {
+      message: hourMinuteSecondRegexErrorMessage(),
+    })
     .superRefine((val, ctx) => {
       try {
         parseHourMinuteSecondStringToSeconds(val);

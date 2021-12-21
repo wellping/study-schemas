@@ -17,7 +17,10 @@ import {
   QuestionImageOptionsSchema,
   WrapperQuestionSchema,
 } from "./schemas/Question";
-import { StreamsSchema } from "./schemas/Stream";
+import {
+  StreamsSchema,
+  StreamsStartingQuestionIdsSchema,
+} from "./schemas/Stream";
 import {
   StudyFileSchema,
   StudyInfoSchema,
@@ -82,6 +85,9 @@ export type Ping = z.infer<typeof PingSchema>;
 export type QuestionsList = z.infer<typeof QuestionsListSchema>;
 
 export type Streams = z.infer<typeof StreamsSchema>;
+export type StreamsStartingQuestionIds = z.infer<
+  typeof StreamsStartingQuestionIdsSchema
+>;
 
 export type StudyID = z.infer<typeof StudyIdSchema>;
 

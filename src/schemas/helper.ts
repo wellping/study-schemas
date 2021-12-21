@@ -1,9 +1,8 @@
-export const idRegex = /^\w+$/;
-
-/**
- * Notice that `.regex(idRegex)` for `z.string()` is preferred if possible.
- */
-export const idRegexCheck = (val: string) => idRegex.test(val);
-
+export const ID_REGEX = /^\w+$/;
 export const idRegexErrorMessage = (name: string) =>
   `${name} can only include letters, numbers, and "_".`;
+
+// We allow `[` and `]` in Question ID because `withVariable` uses "[__something__]".
+export const QUESTION_ID_REGEX = /^[\w[\]]+$/;
+export const questionIdRegexErrorMessage = (name: string) =>
+  `${name} can only include letters, numbers, "_", "[", and "]".`;

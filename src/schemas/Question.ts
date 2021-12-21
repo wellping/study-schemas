@@ -6,7 +6,7 @@ import {
   ChoicesListSchema,
   ChoiceSchema,
 } from "./common";
-import { idRegex, idRegexErrorMessage } from "./helper";
+import { ID_REGEX, idRegexErrorMessage } from "./helper";
 
 export const SLIDER_DEFAULTS = {
   DEFAULT_VALUE: 50,
@@ -288,14 +288,14 @@ export const MultipleTextQuestionSchema = BaseQuestionSchema.extend({
   indexName: z
     .string()
     .nonempty()
-    .regex(idRegex, {
+    .regex(ID_REGEX, {
       // Because `indexName` might be used in Question ID.
       message: idRegexErrorMessage("index name"),
     }),
   variableName: z
     .string()
     .nonempty()
-    .regex(idRegex, {
+    .regex(ID_REGEX, {
       // Because `variableName` might be used in Question ID.
       message: idRegexErrorMessage("variable name"),
     }),

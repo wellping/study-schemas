@@ -4,34 +4,38 @@
  */
 import * as z from "zod";
 
-import { idRegex, idRegexErrorMessage } from "./helper";
+import {
+  ID_REGEX,
+  idRegexErrorMessage,
+  QUESTION_ID_REGEX,
+  questionIdRegexErrorMessage,
+} from "./helper";
 
 export const StudyIdSchema = z
   .string()
   .nonempty()
-  .regex(idRegex, {
+  .regex(ID_REGEX, {
     message: idRegexErrorMessage("Study ID"),
   });
 
 export const StreamNameSchema = z
   .string()
   .nonempty()
-  .regex(idRegex, {
+  .regex(ID_REGEX, {
     message: idRegexErrorMessage("Stream name"),
   });
 
 export const QuestionIdSchema = z
   .string()
   .nonempty()
-  // We allow `[\]` because `withVariable` uses "[__something__]".
-  .regex(/^[\w[\]]+$/, {
-    message: `Question ID can only include letters, numbers, "_", "[", and "]".`,
+  .regex(QUESTION_ID_REGEX, {
+    message: questionIdRegexErrorMessage("Question ID"),
   });
 
 export const PingIdSchema = z
   .string()
   .nonempty()
-  .regex(idRegex, {
+  .regex(ID_REGEX, {
     message: idRegexErrorMessage("Stream name"),
   });
 

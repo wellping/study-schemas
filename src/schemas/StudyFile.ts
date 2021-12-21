@@ -137,6 +137,10 @@ const HourMinuteSecondSchema = z.union([
   z.number().int().nonnegative(),
 ]);
 
+/**
+ * Notice the numbering here is not affected by the `weekStartsOn` option
+ * (i.e., `0` here is always Sunday).
+ */
 const StreamsOnDaysOfWeekSchema = z.object({
   0: z.array(StreamNameSchema), // Sunday
   1: z.array(StreamNameSchema), // Monday

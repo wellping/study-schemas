@@ -19,7 +19,6 @@ import {
   HowLongAgoAnswerSchema,
   AnswerSchema,
 } from "./schemas/Answer";
-import { Question, QuestionsList } from "./types";
 
 export type SliderAnswerData = z.infer<typeof SliderAnswerDataSchema>;
 
@@ -61,15 +60,3 @@ export type HowLongAgoAnswer = z.infer<typeof HowLongAgoAnswerSchema>;
 export type Answer = z.infer<typeof AnswerSchema>;
 
 export type AnswersList = z.infer<typeof AnswersListSchema>;
-
-export type DataValidationFunction = () => boolean;
-
-export interface QuestionScreenProps {
-  question: Question;
-  loadingCompleted: () => void;
-  onDataChange: (data: AnswerData) => void;
-  allAnswers: AnswersList;
-  allQuestions: QuestionsList;
-  pipeInExtraMetaData: (input: string) => string;
-  setDataValidationFunction: (func: DataValidationFunction) => void;
-}

@@ -1,7 +1,6 @@
 import { differenceInSeconds, isValid, parse, parseJSON } from "date-fns";
 import * as z from "zod";
 
-import { StudyFile, StudyInfo, ExtraData } from "../types";
 import { StreamsSchema, StreamsStartingQuestionIdsSchema } from "./Stream";
 import { StudyIdSchema, StreamNameSchema, ChoicesListSchema } from "./common";
 
@@ -482,15 +481,3 @@ export const StudyFileSchema = z.object({
   extraData: ExtraDataSchema,
 });
 // TODO: REFINE IF `streams` matches `streamsStartingQuestionIds`'s key
-
-export function parseJsonToStudyInfo(rawJson: any): StudyInfo {
-  return StudyInfoSchema.parse(rawJson);
-}
-
-export function parseJsonToExtraData(rawJson: any): ExtraData {
-  return ExtraDataSchema.parse(rawJson);
-}
-
-export function parseJsonToStudyFile(rawJson: any): StudyFile {
-  return StudyFileSchema.parse(rawJson);
-}

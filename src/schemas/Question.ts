@@ -6,7 +6,7 @@ import {
   ChoicesListSchema,
   ChoiceSchema,
 } from "./common";
-import { ID_REGEX, idRegexErrorMessage } from "./helper";
+import { ID_REGEX, idRegexErrorMessage } from "../regexes";
 
 export const SLIDER_DEFAULTS = {
   DEFAULT_VALUE: 50,

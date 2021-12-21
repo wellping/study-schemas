@@ -8,7 +8,7 @@ import {
   HOURMINUTESECOND_REGEX,
   datetimeRegexErrorMessage,
   hourMinuteSecondRegexErrorMessage,
-} from "./helper";
+} from "../regexes";
 
 export const WeekStartsOnSchema = z.union([
   z.literal(0),

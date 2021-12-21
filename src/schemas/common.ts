@@ -9,7 +9,7 @@ import {
   idRegexErrorMessage,
   QUESTION_ID_REGEX,
   questionIdRegexErrorMessage,
-} from "./helper";
+} from "../regexes";
 
 export const StudyIdSchema = z
   .string()

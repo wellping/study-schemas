@@ -62,6 +62,35 @@ export const PlaceholderReplacementValueTreatmentOptionsSchema = z.object({
     .optional(),
 });
 
+function parseJSONDateStringToDateAndThrowIfError(
+  jsonDateString: string,
+): Date {
+  const date = parseJSON(jsonDateString);
+  if (!isValid(date)) {
+    throw new Error(`parse produces ${date}`);
+  }
+  return date;
+}
+const DateOrStringDateSchema = z.union([
+  z
+    .string()
+    .superRefine((val, ctx) => {
+      try {
+        parseJSONDateStringToDateAndThrowIfError(val);
+      } catch (error) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `Date string parse error: ${error}.\nPlease format your time in the JSON date format such as "2020-03-10T08:00:00.000Z".`,
+        });
+      }
+    })
+    .transform((val) => parseJSONDateStringToDateAndThrowIfError(val)),
+
+  // Notice that this could also just be a date
+  // (though this is probably not possible when we are parsing).
+  z.date(),
+]);
+
 /**
  * Parse an hour-minute-second string to number of seconds since 00:00:00.
  */
@@ -209,7 +238,7 @@ const _StudyInfoSchema = z.object({
    *
    * Timezone in this date string is ignored.
    */
-  startDate: z.date(),
+  startDate: DateOrStringDateSchema,
 
   /**
    * The end date (time) of the study.
@@ -218,7 +247,7 @@ const _StudyInfoSchema = z.object({
    *
    * Timezone in this date string is ignored.
    */
-  endDate: z.date(),
+  endDate: DateOrStringDateSchema,
 
   /**
    * The time every day that ping notifications will be sent.
@@ -454,19 +483,7 @@ export const StudyFileSchema = z.object({
 });
 // TODO: REFINE IF `streams` matches `streamsStartingQuestionIds`'s key
 
-// https://stackoverflow.com/a/13104500/2603230
-const convertSpecialTypesInStudyInfo = (studyInfoRawJson: any) => {
-  // We have to parse the dates as JSON stores dates as strings.
-  if (studyInfoRawJson?.startDate) {
-    studyInfoRawJson.startDate = parseJSON(studyInfoRawJson.startDate);
-  }
-  if (studyInfoRawJson?.endDate) {
-    studyInfoRawJson.endDate = parseJSON(studyInfoRawJson.endDate);
-  }
-};
-
 export function parseJsonToStudyInfo(rawJson: any): StudyInfo {
-  convertSpecialTypesInStudyInfo(rawJson);
   return StudyInfoSchema.parse(rawJson);
 }
 
@@ -475,6 +492,5 @@ export function parseJsonToExtraData(rawJson: any): ExtraData {
 }
 
 export function parseJsonToStudyFile(rawJson: any): StudyFile {
-  convertSpecialTypesInStudyInfo(rawJson?.studyInfo);
   return StudyFileSchema.parse(rawJson);
 }

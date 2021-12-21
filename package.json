@@ -6,9 +6,6 @@
   "files": [
     "./lib"
   ],
-  "exports": {
-    "./": "./lib/"
-  },
   "scripts": {
     "test": "jest",
     "build": "tsc",

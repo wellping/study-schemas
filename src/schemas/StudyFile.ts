@@ -137,6 +137,16 @@ const HourMinuteSecondSchema = z.union([
   z.number().int().nonnegative(),
 ]);
 
+const StreamsOnDaysOfWeekSchema = z.object({
+  0: z.array(StreamNameSchema), // Sunday
+  1: z.array(StreamNameSchema), // Monday
+  2: z.array(StreamNameSchema), // Tuesday
+  3: z.array(StreamNameSchema), // Wednesday
+  4: z.array(StreamNameSchema), // Thursday
+  5: z.array(StreamNameSchema), // Friday
+  6: z.array(StreamNameSchema), // Saturday
+});
+
 const _StudyInfoSchema = z.object({
   /**
    * The ID of the study.
@@ -326,27 +336,54 @@ const _StudyInfoSchema = z.object({
   /**
    * The streams that the user will fill (in this order) every day.
    *
-   * For example, if `streamsOrder[0]` is `["dog", "cat", "wolf", "lynx"]`,
+   * For example, if `streamsOrder.sunday` is `["dog", "cat", "wolf", "lynx"]`,
    * then on Sunday, if the user opens all four pings they received, they
    * will fill the "dog", "cat", "wolf", and "lynx" stream (in this order).
    * If the user only opens two pings, they will fill the "dog" and "cat"
    * stream (in this order).
    *
-   * Notice the numbering here is not affected by the `weekStartsOn` option
-   * above (i.e., `0` here is always Sunday).
-   *
    * The number of elements each day should be equal to the number of elements
-   * in `frequency.hoursEveryday` above.
+   * in `pingsFrequency` above.
    */
-  streamsOrder: z.object({
-    0: z.array(StreamNameSchema), // Sunday
-    1: z.array(StreamNameSchema), // Monday
-    2: z.array(StreamNameSchema), // Tuesday
-    3: z.array(StreamNameSchema), // Wednesday
-    4: z.array(StreamNameSchema), // Thursday
-    5: z.array(StreamNameSchema), // Friday
-    6: z.array(StreamNameSchema), // Saturday
-  }),
+  streamsOrder: z.union([
+    StreamsOnDaysOfWeekSchema,
+
+    // Human-readable days of week.
+    z
+      .object({
+        sunday: z.array(StreamNameSchema), // Sunday
+        monday: z.array(StreamNameSchema), // Monday
+        tuesday: z.array(StreamNameSchema), // Tuesday
+        wednesday: z.array(StreamNameSchema), // Wednesday
+        thursday: z.array(StreamNameSchema), // Thursday
+        friday: z.array(StreamNameSchema), // Friday
+        saturday: z.array(StreamNameSchema), // Saturday
+      })
+      .transform((val) => {
+        return {
+          0: val.sunday,
+          1: val.monday,
+          2: val.tuesday,
+          3: val.wednesday,
+          4: val.thursday,
+          5: val.friday,
+          6: val.saturday,
+        } as z.infer<typeof StreamsOnDaysOfWeekSchema>;
+      }),
+
+    // A shorthand for if it is the same everyday.
+    z.array(StreamNameSchema).transform((val) => {
+      return {
+        0: val,
+        1: val,
+        2: val,
+        3: val,
+        4: val,
+        5: val,
+        6: val,
+      } as z.infer<typeof StreamsOnDaysOfWeekSchema>;
+    }),
+  ]),
 
   /**
    * The stream type(s) for n-th ping(s). The key is the "n" in "n-th ping".

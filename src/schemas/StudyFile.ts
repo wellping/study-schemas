@@ -43,26 +43,32 @@ export const PlaceholderReplacementValueTreatmentOptionsSchema = z.object({
   decapitalizeFirstCharacter: z
     .object({
       /**
-       * If `true`, the first character of the answer data replacing the
-       * placeholder will be decapitalized.
+       * The first character of the answer data replacing the placeholder will be
+       * decapitalized.
        *
-       * For example, if the answer is `"Friends"` and variable is `"CONTACT"`
-       * and `decapitalizeFirstCharacter` is `true`, `"Why [__CONTACT__]?"`
-       * will be replaced by `"Why friends?"`.
+       * For example, if the answer is `"Friends"` and the variable is `"CONTACT"`,
+       * and `decapitalizeFirstCharacter.enabled` is `true`,
+       * and `decapitalizeFirstCharacter.excludes` does not include `"Friends"`
+       * (or if `decapitalizeFirstCharacter.includes` includes `"Friends"`),
+       * then `"Why [__CONTACT__]?"` will be replaced by `"Why friends?"`.
        */
       enabled: z.boolean(),
-
-      /**
-       * If set, answer data included in it will not be decapitalize.
-       */
-      excludes: z.array(z.string()).optional(),
-
-      /**
-       * If set, only answer data included in it will be decapitalize.
-       *
-       * If both `excludes` and `includes` are set, `excludes` is ignored.
-       */
-      includes: z.array(z.string()).optional(),
+      options: z
+        .union([
+          z.object({
+            /**
+             * If set, answer data included in it will not be decapitalize.
+             */
+            excludes: z.array(z.string()),
+          }),
+          z.object({
+            /**
+             * If set, only answer data included in it will be decapitalize.
+             */
+            includes: z.array(z.string()),
+          }),
+        ])
+        .optional(),
     })
     .optional(),
 });

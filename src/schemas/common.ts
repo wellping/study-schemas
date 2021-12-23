@@ -83,3 +83,7 @@ export const ChoicesListSchema = z
       message: "There should not be duplicate elements in the choices list.",
     },
   );
+
+export type GetSchemaOptions = {
+  strict?: boolean;
+};

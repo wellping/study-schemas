@@ -539,13 +539,19 @@ export const StudyInfoSchema = (
   );
 // TODO: REFINE IF streams in e.g. streamsOrder, etc. is found in `streamsStartingQuestionIds`'s key
 
-export const ExtraDataSchema = z.object({
+const _ExtraDataSchema = z.object({
   reusableChoices: z.record(ChoicesListSchema).optional(),
 });
+export const ExtraDataSchema = __WELLPING_SHOULD_USE_STRICT_SCHEMA__
+  ? _ExtraDataSchema.strict()
+  : _ExtraDataSchema;
 
-export const StudyFileSchema = z.object({
+const _StudyFileSchema = z.object({
   studyInfo: StudyInfoSchema,
   streams: StreamsSchema,
   extraData: ExtraDataSchema,
 });
+export const StudyFileSchema = __WELLPING_SHOULD_USE_STRICT_SCHEMA__
+  ? _StudyFileSchema.strict()
+  : _StudyFileSchema;
 // TODO: REFINE IF `streams` matches `streamsStartingQuestionIds`'s key

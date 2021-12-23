@@ -118,7 +118,7 @@ const _BaseQuestionSchema = z.object({
    */
   next: QuestionIdSchema.nullable(),
 });
-const BaseQuestionSchema = __DEV__
+const BaseQuestionSchema = __WELLPING_SHOULD_USE_STRICT_SCHEMA__
   ? _BaseQuestionSchema.strict()
   : _BaseQuestionSchema;
 

@@ -11,6 +11,11 @@ import {
   questionIdRegexErrorMessage,
 } from "../regexes";
 
+/**
+ * Used to indicate a key should not be in an object.
+ */
+export const EXCLUDE_KEY_SCHEMA = z.never().optional(); // a.k.a. `z.undefined()`
+
 export const StudyIdSchema = z
   .string()
   .nonempty()

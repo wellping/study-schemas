@@ -2,7 +2,12 @@ import { differenceInSeconds, isValid, parse, parseJSON } from "date-fns";
 import * as z from "zod";
 
 import { StreamsSchema, StreamsStartingQuestionIdsSchema } from "./Stream";
-import { StudyIdSchema, StreamNameSchema, ChoicesListSchema } from "./common";
+import {
+  StudyIdSchema,
+  StreamNameSchema,
+  ChoicesListSchema,
+  EXCLUDE_KEY_SCHEMA,
+} from "./common";
 import {
   DATETIME_REGEX,
   HOURMINUTESECOND_REGEX,
@@ -60,12 +65,14 @@ export const PlaceholderReplacementValueTreatmentOptionsSchema = z.object({
              * If set, answer data included in it will not be decapitalize.
              */
             excludes: z.array(z.string()),
+            includes: EXCLUDE_KEY_SCHEMA,
           }),
           z.object({
             /**
              * If set, only answer data included in it will be decapitalize.
              */
             includes: z.array(z.string()),
+            excludes: EXCLUDE_KEY_SCHEMA,
           }),
         ])
         .optional(),

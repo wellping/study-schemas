@@ -303,49 +303,38 @@ export const getYesNoQuestionSchema = (options: GetSchemaOptions) =>
 export const YesNoQuestionSchema = getYesNoQuestionSchema({});
 
 export const getMultipleTextQuestionSchema = (options: GetSchemaOptions) =>
-  getBaseQuestionSchema(options)
-    .extend({
-      // `id` will store the number of text fields answered.
-      type: z.literal(QuestionTypeSchema.enum.MultipleText),
-      indexName: z
-        .string()
-        .nonempty()
-        .regex(ID_REGEX, {
-          // Because `indexName` might be used in Question ID.
-          message: idRegexErrorMessage("index name"),
-        }),
-      variableName: z
-        .string()
-        .nonempty()
-        .regex(ID_REGEX, {
-          // Because `variableName` might be used in Question ID.
-          message: idRegexErrorMessage("variable name"),
-        }),
-      placeholder: z.string().optional(),
-      keyboardType: z.string().optional(),
-      choices: z.union([z.string(), ChoicesListSchema]).optional(),
-      forceChoice: z.boolean().optional(),
-      alwaysShowChoices: z.boolean().optional(),
-      max: z.number().int().positive(),
-      // The max number of text field will be `max` minus the number of text the
-      // participant entered in `maxMinus` question.
-      maxMinus: QuestionIdSchema.optional(),
-      repeatedItemStartId: QuestionIdSchema.optional(),
-    })
-    .refine(
-      (question) => {
-        if (question.forceChoice !== undefined) {
-          if (question.choices === undefined) {
-            return false;
-          }
-        }
-        return true;
-      },
-      {
-        message: "`forceChoice` can only be set if `choices` is set.",
-        path: ["forceChoice"],
-      },
-    );
+  getBaseQuestionSchema(options).extend({
+    // `id` will store the number of text fields answered.
+    type: z.literal(QuestionTypeSchema.enum.MultipleText),
+    indexName: z
+      .string()
+      .nonempty()
+      .regex(ID_REGEX, {
+        // Because `indexName` might be used in Question ID.
+        message: idRegexErrorMessage("index name"),
+      }),
+    variableName: z
+      .string()
+      .nonempty()
+      .regex(ID_REGEX, {
+        // Because `variableName` might be used in Question ID.
+        message: idRegexErrorMessage("variable name"),
+      }),
+    placeholder: z.string().optional(),
+    keyboardType: z.string().optional(),
+    dropdownChoices: z
+      .object({
+        choices: z.union([z.string(), ChoicesListSchema]),
+        forceChoice: z.boolean().optional(),
+        alwaysShowChoices: z.boolean().optional(),
+      })
+      .optional(),
+    max: z.number().int().positive(),
+    // The max number of text field will be `max` minus the number of text the
+    // participant entered in `maxMinus` question.
+    maxMinus: QuestionIdSchema.optional(),
+    repeatedItemStartId: QuestionIdSchema.optional(),
+  });
 export const MultipleTextQuestionSchema = getMultipleTextQuestionSchema({});
 
 export const getHowLongAgoQuestionSchema = (options: GetSchemaOptions) =>

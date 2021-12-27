@@ -1,30 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MultipleTextQuestionSchema choices choices should not be duplicated 1`] = `
+exports[`MultipleTextQuestionSchema dropdownChoices choices choices should not be duplicated 1`] = `
 "[
   {
     \\"code\\": \\"custom\\",
     \\"message\\": \\"There should not be duplicate elements in the choices list.\\",
     \\"path\\": [
+      \\"dropdownChoices\\",
       \\"choices\\"
     ]
   }
 ]"
 `;
 
-exports[`MultipleTextQuestionSchema choices choices should not be duplicated 2`] = `
+exports[`MultipleTextQuestionSchema dropdownChoices choices choices should not be duplicated 2`] = `
 "[
   {
     \\"code\\": \\"custom\\",
     \\"message\\": \\"There should not be duplicate elements in the choices list.\\",
     \\"path\\": [
+      \\"dropdownChoices\\",
       \\"choices\\"
     ]
   }
 ]"
 `;
 
-exports[`MultipleTextQuestionSchema choices choices string cannot be empty 1`] = `
+exports[`MultipleTextQuestionSchema dropdownChoices choices choices string cannot be empty 1`] = `
 "[
   {
     \\"code\\": \\"too_small\\",
@@ -33,6 +35,7 @@ exports[`MultipleTextQuestionSchema choices choices string cannot be empty 1`] =
     \\"inclusive\\": true,
     \\"message\\": \\"Should be at least 1 characters\\",
     \\"path\\": [
+      \\"dropdownChoices\\",
       \\"choices\\",
       0
     ]
@@ -40,7 +43,7 @@ exports[`MultipleTextQuestionSchema choices choices string cannot be empty 1`] =
 ]"
 `;
 
-exports[`MultipleTextQuestionSchema choices choices string cannot be empty 2`] = `
+exports[`MultipleTextQuestionSchema dropdownChoices choices choices string cannot be empty 2`] = `
 "[
   {
     \\"code\\": \\"too_small\\",
@@ -49,6 +52,7 @@ exports[`MultipleTextQuestionSchema choices choices string cannot be empty 2`] =
     \\"inclusive\\": true,
     \\"message\\": \\"Should be at least 1 characters\\",
     \\"path\\": [
+      \\"dropdownChoices\\",
       \\"choices\\",
       0
     ]
@@ -56,7 +60,7 @@ exports[`MultipleTextQuestionSchema choices choices string cannot be empty 2`] =
 ]"
 `;
 
-exports[`MultipleTextQuestionSchema choices should not be anything besides array and string: number 1`] = `
+exports[`MultipleTextQuestionSchema dropdownChoices choices should not be anything besides array and string: number 1`] = `
 "[
   {
     \\"code\\": \\"invalid_union\\",
@@ -68,6 +72,7 @@ exports[`MultipleTextQuestionSchema choices should not be anything besides array
             \\"expected\\": \\"string\\",
             \\"received\\": \\"number\\",
             \\"path\\": [
+              \\"dropdownChoices\\",
               \\"choices\\"
             ],
             \\"message\\": \\"Expected string, received number\\"
@@ -82,6 +87,7 @@ exports[`MultipleTextQuestionSchema choices should not be anything besides array
             \\"expected\\": \\"array\\",
             \\"received\\": \\"number\\",
             \\"path\\": [
+              \\"dropdownChoices\\",
               \\"choices\\"
             ],
             \\"message\\": \\"Expected array, received number\\"
@@ -91,6 +97,7 @@ exports[`MultipleTextQuestionSchema choices should not be anything besides array
       }
     ],
     \\"path\\": [
+      \\"dropdownChoices\\",
       \\"choices\\"
     ],
     \\"message\\": \\"Invalid input\\"
@@ -98,7 +105,7 @@ exports[`MultipleTextQuestionSchema choices should not be anything besides array
 ]"
 `;
 
-exports[`MultipleTextQuestionSchema choices should not be anything besides array and string: object 1`] = `
+exports[`MultipleTextQuestionSchema dropdownChoices choices should not be anything besides array and string: object 1`] = `
 "[
   {
     \\"code\\": \\"invalid_union\\",
@@ -110,6 +117,7 @@ exports[`MultipleTextQuestionSchema choices should not be anything besides array
             \\"expected\\": \\"string\\",
             \\"received\\": \\"object\\",
             \\"path\\": [
+              \\"dropdownChoices\\",
               \\"choices\\"
             ],
             \\"message\\": \\"Expected string, received object\\"
@@ -124,6 +132,7 @@ exports[`MultipleTextQuestionSchema choices should not be anything besides array
             \\"expected\\": \\"array\\",
             \\"received\\": \\"object\\",
             \\"path\\": [
+              \\"dropdownChoices\\",
               \\"choices\\"
             ],
             \\"message\\": \\"Expected array, received object\\"
@@ -133,6 +142,7 @@ exports[`MultipleTextQuestionSchema choices should not be anything besides array
       }
     ],
     \\"path\\": [
+      \\"dropdownChoices\\",
       \\"choices\\"
     ],
     \\"message\\": \\"Invalid input\\"
@@ -140,7 +150,7 @@ exports[`MultipleTextQuestionSchema choices should not be anything besides array
 ]"
 `;
 
-exports[`MultipleTextQuestionSchema choices should not be empty array 1`] = `
+exports[`MultipleTextQuestionSchema dropdownChoices choices should not be empty array 1`] = `
 "[
   {
     \\"code\\": \\"too_small\\",
@@ -149,13 +159,14 @@ exports[`MultipleTextQuestionSchema choices should not be empty array 1`] = `
     \\"inclusive\\": true,
     \\"message\\": \\"Should have at least 1 items\\",
     \\"path\\": [
+      \\"dropdownChoices\\",
       \\"choices\\"
     ]
   }
 ]"
 `;
 
-exports[`MultipleTextQuestionSchema choices should not be null 1`] = `
+exports[`MultipleTextQuestionSchema dropdownChoices choices should not be null 1`] = `
 "[
   {
     \\"code\\": \\"invalid_union\\",
@@ -167,6 +178,7 @@ exports[`MultipleTextQuestionSchema choices should not be null 1`] = `
             \\"expected\\": \\"string\\",
             \\"received\\": \\"null\\",
             \\"path\\": [
+              \\"dropdownChoices\\",
               \\"choices\\"
             ],
             \\"message\\": \\"Expected string, received null\\"
@@ -181,6 +193,7 @@ exports[`MultipleTextQuestionSchema choices should not be null 1`] = `
             \\"expected\\": \\"array\\",
             \\"received\\": \\"null\\",
             \\"path\\": [
+              \\"dropdownChoices\\",
               \\"choices\\"
             ],
             \\"message\\": \\"Expected array, received null\\"
@@ -190,6 +203,7 @@ exports[`MultipleTextQuestionSchema choices should not be null 1`] = `
       }
     ],
     \\"path\\": [
+      \\"dropdownChoices\\",
       \\"choices\\"
     ],
     \\"message\\": \\"Invalid input\\"
@@ -197,13 +211,14 @@ exports[`MultipleTextQuestionSchema choices should not be null 1`] = `
 ]"
 `;
 
-exports[`MultipleTextQuestionSchema forceChoice should not be anything other than boolean: number 1`] = `
+exports[`MultipleTextQuestionSchema dropdownChoices forceChoice should not be anything other than boolean: number 1`] = `
 "[
   {
     \\"code\\": \\"invalid_type\\",
     \\"expected\\": \\"boolean\\",
     \\"received\\": \\"number\\",
     \\"path\\": [
+      \\"dropdownChoices\\",
       \\"forceChoice\\"
     ],
     \\"message\\": \\"Expected boolean, received number\\"
@@ -211,13 +226,14 @@ exports[`MultipleTextQuestionSchema forceChoice should not be anything other tha
 ]"
 `;
 
-exports[`MultipleTextQuestionSchema forceChoice should not be anything other than boolean: string true 1`] = `
+exports[`MultipleTextQuestionSchema dropdownChoices forceChoice should not be anything other than boolean: string true 1`] = `
 "[
   {
     \\"code\\": \\"invalid_type\\",
     \\"expected\\": \\"boolean\\",
     \\"received\\": \\"string\\",
     \\"path\\": [
+      \\"dropdownChoices\\",
       \\"forceChoice\\"
     ],
     \\"message\\": \\"Expected boolean, received string\\"
@@ -225,13 +241,14 @@ exports[`MultipleTextQuestionSchema forceChoice should not be anything other tha
 ]"
 `;
 
-exports[`MultipleTextQuestionSchema forceChoice should not be null 1`] = `
+exports[`MultipleTextQuestionSchema dropdownChoices forceChoice should not be null 1`] = `
 "[
   {
     \\"code\\": \\"invalid_type\\",
     \\"expected\\": \\"boolean\\",
     \\"received\\": \\"null\\",
     \\"path\\": [
+      \\"dropdownChoices\\",
       \\"forceChoice\\"
     ],
     \\"message\\": \\"Expected boolean, received null\\"
@@ -239,26 +256,151 @@ exports[`MultipleTextQuestionSchema forceChoice should not be null 1`] = `
 ]"
 `;
 
-exports[`MultipleTextQuestionSchema forceChoice should not be set if choices is not set: false 1`] = `
+exports[`MultipleTextQuestionSchema dropdownChoices forceChoice should not be set if choices is not set: false 1`] = `
 "[
   {
-    \\"code\\": \\"custom\\",
-    \\"message\\": \\"\`forceChoice\` can only be set if \`choices\` is set.\\",
+    \\"code\\": \\"invalid_union\\",
+    \\"unionErrors\\": [
+      {
+        \\"issues\\": [
+          {
+            \\"code\\": \\"invalid_type\\",
+            \\"expected\\": \\"string\\",
+            \\"received\\": \\"undefined\\",
+            \\"path\\": [
+              \\"dropdownChoices\\",
+              \\"choices\\"
+            ],
+            \\"message\\": \\"Required\\"
+          }
+        ],
+        \\"name\\": \\"ZodError\\"
+      },
+      {
+        \\"issues\\": [
+          {
+            \\"code\\": \\"invalid_type\\",
+            \\"expected\\": \\"array\\",
+            \\"received\\": \\"undefined\\",
+            \\"path\\": [
+              \\"dropdownChoices\\",
+              \\"choices\\"
+            ],
+            \\"message\\": \\"Required\\"
+          }
+        ],
+        \\"name\\": \\"ZodError\\"
+      }
+    ],
     \\"path\\": [
-      \\"forceChoice\\"
-    ]
+      \\"dropdownChoices\\",
+      \\"choices\\"
+    ],
+    \\"message\\": \\"Invalid input\\"
   }
 ]"
 `;
 
-exports[`MultipleTextQuestionSchema forceChoice should not be set if choices is not set: true 1`] = `
+exports[`MultipleTextQuestionSchema dropdownChoices forceChoice should not be set if choices is not set: true 1`] = `
 "[
   {
-    \\"code\\": \\"custom\\",
-    \\"message\\": \\"\`forceChoice\` can only be set if \`choices\` is set.\\",
+    \\"code\\": \\"invalid_union\\",
+    \\"unionErrors\\": [
+      {
+        \\"issues\\": [
+          {
+            \\"code\\": \\"invalid_type\\",
+            \\"expected\\": \\"string\\",
+            \\"received\\": \\"undefined\\",
+            \\"path\\": [
+              \\"dropdownChoices\\",
+              \\"choices\\"
+            ],
+            \\"message\\": \\"Required\\"
+          }
+        ],
+        \\"name\\": \\"ZodError\\"
+      },
+      {
+        \\"issues\\": [
+          {
+            \\"code\\": \\"invalid_type\\",
+            \\"expected\\": \\"array\\",
+            \\"received\\": \\"undefined\\",
+            \\"path\\": [
+              \\"dropdownChoices\\",
+              \\"choices\\"
+            ],
+            \\"message\\": \\"Required\\"
+          }
+        ],
+        \\"name\\": \\"ZodError\\"
+      }
+    ],
     \\"path\\": [
-      \\"forceChoice\\"
-    ]
+      \\"dropdownChoices\\",
+      \\"choices\\"
+    ],
+    \\"message\\": \\"Invalid input\\"
+  }
+]"
+`;
+
+exports[`MultipleTextQuestionSchema dropdownChoices should not be empty object 1`] = `
+"[
+  {
+    \\"code\\": \\"invalid_union\\",
+    \\"unionErrors\\": [
+      {
+        \\"issues\\": [
+          {
+            \\"code\\": \\"invalid_type\\",
+            \\"expected\\": \\"string\\",
+            \\"received\\": \\"undefined\\",
+            \\"path\\": [
+              \\"dropdownChoices\\",
+              \\"choices\\"
+            ],
+            \\"message\\": \\"Required\\"
+          }
+        ],
+        \\"name\\": \\"ZodError\\"
+      },
+      {
+        \\"issues\\": [
+          {
+            \\"code\\": \\"invalid_type\\",
+            \\"expected\\": \\"array\\",
+            \\"received\\": \\"undefined\\",
+            \\"path\\": [
+              \\"dropdownChoices\\",
+              \\"choices\\"
+            ],
+            \\"message\\": \\"Required\\"
+          }
+        ],
+        \\"name\\": \\"ZodError\\"
+      }
+    ],
+    \\"path\\": [
+      \\"dropdownChoices\\",
+      \\"choices\\"
+    ],
+    \\"message\\": \\"Invalid input\\"
+  }
+]"
+`;
+
+exports[`MultipleTextQuestionSchema dropdownChoices should not be null 1`] = `
+"[
+  {
+    \\"code\\": \\"invalid_type\\",
+    \\"expected\\": \\"object\\",
+    \\"received\\": \\"null\\",
+    \\"path\\": [
+      \\"dropdownChoices\\"
+    ],
+    \\"message\\": \\"Expected object, received null\\"
   }
 ]"
 `;

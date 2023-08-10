@@ -18,6 +18,7 @@ import {
   WrapperQuestionSchema,
 } from "./schemas/Question";
 import {
+  StreamGroupMappingSchema,
   StreamsSchema,
   StreamsStartingQuestionIdsSchema,
 } from "./schemas/Stream";
@@ -105,3 +106,5 @@ export type StudyInfo = z.infer<typeof StudyInfoSchema>;
 export type ExtraData = z.infer<typeof ExtraDataSchema>;
 
 export type StudyFile = z.infer<typeof StudyFileSchema>;
+
+export type StreamGroupMapping = z.infer<typeof StreamGroupMappingSchema>;

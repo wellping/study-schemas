@@ -1,7 +1,7 @@
 import { differenceInSeconds, isValid, parse, parseJSON } from "date-fns";
 import * as z from "zod";
 
-import { StreamsSchema, StreamsStartingQuestionIdsSchema } from "./Stream";
+import { StreamGroupMappingSchema, StreamsSchema, StreamsStartingQuestionIdsSchema } from "./Stream";
 import {
   StudyIdSchema,
   StreamNameSchema,
@@ -9,8 +9,10 @@ import {
   EXCLUDE_KEY_SCHEMA,
 } from "./common";
 import {
+  DATE_REGEX,
   DATETIME_REGEX,
   HOURMINUTESECOND_REGEX,
+  dateRegexErrorMessage,
   datetimeRegexErrorMessage,
   hourMinuteSecondRegexErrorMessage,
 } from "../regexes";
@@ -24,6 +26,13 @@ export const WeekStartsOnSchema = z.union([
   z.literal(5),
   z.literal(6),
 ]);
+
+export const StudyGroupInfoSchema = z.array(
+  z.object({
+    userId: z.string().nonempty(),
+    groupId: z.string().nonempty(),
+  }),
+).optional();
 
 export const FirebaseConfigSchema = z.record(z.string());
 export const FirebaseServerConfigSchema = z.object({
@@ -164,6 +173,18 @@ const StreamsOnDaysOfWeekSchema = z.object({
   6: z.array(StreamNameSchema), // Saturday
 });
 
+/**
+ * If specific dates are needed, then use this type instead
+ */
+const StreamsOnDateSchema = z.array(
+  z.object({
+    date: z.string().regex(DATE_REGEX, {
+      message: dateRegexErrorMessage(),
+    }),
+    streams: z.array(StreamNameSchema),
+  }),
+);
+
 const _StudyInfoSchema = z.object({
   /**
    * The ID of the study.
@@ -244,6 +265,7 @@ const _StudyInfoSchema = z.object({
     firebase: FirebaseServerConfigSchema.optional(),
     beiwe: BeiweServerConfigSchema.optional(),
   }),
+  studyGroup: StudyGroupInfoSchema.optional(),
 
   /**
    * The URL of the study consent form (or any web page you would want the
@@ -364,7 +386,7 @@ const _StudyInfoSchema = z.object({
    */
   streamsOrder: z.union([
     StreamsOnDaysOfWeekSchema,
-
+    StreamsOnDateSchema,
     // Human-readable days of week.
     z
       .object({
@@ -524,17 +546,71 @@ export const StudyInfoSchema = (
   })
   .refine(
     (data) => {
-      for (const dayStreams of Object.values(data.streamsOrder)) {
-        if (dayStreams.length !== data.pingsFrequency.length) {
-          return false;
+      if (!Array.isArray(data.streamsOrder)) {
+        for (const dayStreams of Object.values(data.streamsOrder)) {
+          if (dayStreams.length !== data.pingsFrequency.length) {
+            return false;
+          }
         }
+        return true;
+      } else {
+        for (let i = 0; i < data.streamsOrder.length; i++) {
+          if (
+            data.streamsOrder[i].streams.length !== data.pingsFrequency.length
+          ) {
+            return false;
+          }
+        }
+        return true;
       }
-      return true;
     },
     {
       message:
         "The number of each day's streams in `streamsOrder` needs to be equal " +
         "to the length of `pingsFrequency`.",
+    },
+  )
+  .refine(
+    (data) => {
+      if (Array.isArray(data.streamsOrder)) {
+        for (let i = 0; i < data.streamsOrder.length; i++) {
+          const startDate = new Date(
+            data.startDate.toISOString().substring(0, 10),
+          );
+          const endDate = new Date(data.endDate.toISOString().substring(0, 10));
+          const dateToCompare = new Date(data.streamsOrder[i].date);
+          if (dateToCompare < startDate || dateToCompare > endDate) {
+            return false;
+          }
+        }
+        return true;
+      }
+      return true;
+    },
+    {
+      message:
+        "`date` in `streamsOrder` must be between `startDate` and `endDate`.",
+    },
+  )
+  .refine(
+    function (data) {
+      if (Array.isArray(data.streamsOrder)) {
+        for (var i = 0; i < data.streamsOrder.length - 1; i++) {
+          if (data.streamsOrder[i].date === data.streamsOrder[i + 1].date)
+            return false;
+          var firstDate = new Date(data.streamsOrder[i].date);
+          var secondDate = new Date(data.streamsOrder[i + 1].date);
+          if (firstDate > secondDate) {
+            return false;
+          }
+        }
+        return true;
+      }
+      return true;
+    },
+    {
+      message:
+        "`date` in `streamsOrder` cannot be duplicate and must be consecutive.",
     },
   );
 // TODO: REFINE IF streams in e.g. streamsOrder, etc. is found in `streamsStartingQuestionIds`'s key
@@ -550,6 +626,7 @@ const _StudyFileSchema = z.object({
   studyInfo: StudyInfoSchema,
   streams: StreamsSchema,
   extraData: ExtraDataSchema,
+  streamGroupMapping: StreamGroupMappingSchema,
 });
 export const StudyFileSchema = __WELLPING_SHOULD_USE_STRICT_SCHEMA__
   ? _StudyFileSchema.strict()
